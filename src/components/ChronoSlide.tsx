@@ -51,8 +51,6 @@ export default function ChronoSlide() {
   const seconds = time.getSeconds();
   const minutes = time.getMinutes();
   let hours = time.getHours();
-  
-  const ampm = hours >= 12 ? "PM" : "AM";
 
   if (!is24Hour) {
     hours = hours % 12;
@@ -89,12 +87,6 @@ export default function ChronoSlide() {
         <div className="w-1 sm:w-2" />
         <DigitSlider digit={timeDigits.s2} />
       </div>
-
-      {!is24Hour && (
-        <div className="text-xl sm:text-2xl font-semibold text-foreground/80 font-headline" aria-live="polite">
-          {ampm}
-        </div>
-      )}
 
       <div className="flex items-center space-x-3 mt-4">
         <Label htmlFor="time-format" className="text-muted-foreground">12-Hour</Label>
