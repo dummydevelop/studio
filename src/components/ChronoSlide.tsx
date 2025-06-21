@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from "react";
 import DigitSlider from "@/components/DigitSlider";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const TimeSeparator = () => (
@@ -28,9 +26,8 @@ const ClockSkeleton = () => (
   </div>
 );
 
-export default function ChronoSlide() {
+export default function ChronoSlide({ is24Hour }: { is24Hour: boolean }) {
   const [time, setTime] = useState<Date | null>(null);
-  const [is24Hour, setIs24Hour] = useState(true);
 
   useEffect(() => {
     // Set initial time on client to avoid hydration mismatch
@@ -43,7 +40,6 @@ export default function ChronoSlide() {
     return (
       <div className="flex flex-col items-center gap-6">
         <ClockSkeleton />
-        <Skeleton className="h-7 w-40" />
       </div>
     );
   }
@@ -86,17 +82,6 @@ export default function ChronoSlide() {
         <DigitSlider digit={timeDigits.s1} />
         <div className="w-1 sm:w-2" />
         <DigitSlider digit={timeDigits.s2} />
-      </div>
-
-      <div className="flex items-center space-x-3 mt-4">
-        <Label htmlFor="time-format" className="text-muted-foreground">12-Hour</Label>
-        <Switch
-          id="time-format"
-          checked={is24Hour}
-          onCheckedChange={setIs24Hour}
-          aria-label="Toggle time format"
-        />
-        <Label htmlFor="time-format" className="font-medium">24-Hour</Label>
       </div>
     </div>
   );
