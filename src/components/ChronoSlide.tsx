@@ -7,21 +7,24 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const TimeSeparator = () => (
-  <div className="flex h-20 w-4 items-center justify-center md:h-28 md:w-8">
-    <span className="text-5xl font-bold text-foreground/30 md:text-7xl">:</span>
+  <div className="flex h-16 w-3 items-center justify-center sm:h-20 sm:w-4 md:h-28 md:w-8">
+    <span className="text-4xl font-bold text-foreground/30 sm:text-5xl md:text-7xl">:</span>
   </div>
 );
 
 const ClockSkeleton = () => (
   <div className="flex items-center justify-center">
-    <Skeleton className="h-20 w-14 md:h-28 md:w-20 rounded-xl" />
-    <Skeleton className="h-20 w-14 md:h-28 md:w-20 rounded-xl ml-2" />
-    <div className="h-20 w-4 md:h-28 md:w-8" />
-    <Skeleton className="h-20 w-14 md:h-28 md:w-20 rounded-xl" />
-    <Skeleton className="h-20 w-14 md:h-28 md:w-20 rounded-xl ml-2" />
-    <div className="h-20 w-4 md:h-28 md:w-8" />
-    <Skeleton className="h-20 w-14 md:h-28 md:w-20 rounded-xl" />
-    <Skeleton className="h-20 w-14 md:h-28 md:w-20 rounded-xl ml-2" />
+    <Skeleton className="h-16 w-10 rounded-lg sm:h-20 sm:w-14 md:h-28 md:w-20 md:rounded-xl" />
+    <div className="w-1 sm:w-2" />
+    <Skeleton className="h-16 w-10 rounded-lg sm:h-20 sm:w-14 md:h-28 md:w-20 md:rounded-xl" />
+    <div className="h-16 w-3 sm:h-20 sm:w-4 md:h-28 md:w-8" />
+    <Skeleton className="h-16 w-10 rounded-lg sm:h-20 sm:w-14 md:h-28 md:w-20 md:rounded-xl" />
+    <div className="w-1 sm:w-2" />
+    <Skeleton className="h-16 w-10 rounded-lg sm:h-20 sm:w-14 md:h-28 md:w-20 md:rounded-xl" />
+    <div className="h-16 w-3 sm:h-20 sm:w-4 md:h-28 md:w-8" />
+    <Skeleton className="h-16 w-10 rounded-lg sm:h-20 sm:w-14 md:h-28 md:w-20 md:rounded-xl" />
+    <div className="w-1 sm:w-2" />
+    <Skeleton className="h-16 w-10 rounded-lg sm:h-20 sm:w-14 md:h-28 md:w-20 md:rounded-xl" />
   </div>
 );
 
@@ -65,21 +68,30 @@ export default function ChronoSlide() {
     s2: seconds % 10,
   };
 
+  const showHourLeadingDigit = is24Hour || hours >= 10;
+
   return (
     <div className="flex flex-col items-center gap-6">
       <div className="flex items-center justify-center" aria-label={`Current time is ${hours}:${minutes}:${seconds}`}>
-        <DigitSlider digit={timeDigits.h1} />
+        {showHourLeadingDigit && (
+          <>
+            <DigitSlider digit={timeDigits.h1} />
+            <div className="w-1 sm:w-2" />
+          </>
+        )}
         <DigitSlider digit={timeDigits.h2} />
         <TimeSeparator />
         <DigitSlider digit={timeDigits.m1} />
+        <div className="w-1 sm:w-2" />
         <DigitSlider digit={timeDigits.m2} />
         <TimeSeparator />
         <DigitSlider digit={timeDigits.s1} />
+        <div className="w-1 sm:w-2" />
         <DigitSlider digit={timeDigits.s2} />
       </div>
 
       {!is24Hour && (
-        <div className="text-2xl font-semibold text-foreground/80 font-headline" aria-live="polite">
+        <div className="text-xl sm:text-2xl font-semibold text-foreground/80 font-headline" aria-live="polite">
           {ampm}
         </div>
       )}
